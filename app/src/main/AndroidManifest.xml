@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.esimtek.gemalto">
+
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:name=".GemaltoApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/AppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".LoginActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HotStampingScanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ImplantationScanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PackageScanActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PackageListActivity"
+            android:label="@string/package_line"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LocationScanActivity"
+            android:label="@string/location" />
+        <activity
+            android:name=".LocationListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChangeBoxActivity"
+            android:label="@string/box_change" />
+        <activity
+            android:name=".PostBadCardActivity"
+            android:label="@string/post_bad_card" />
+        <activity
+            android:name=".UserManageActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TransferActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SetActivity"
+            android:label="@string/set" />
+    </application>
+
+</manifest>

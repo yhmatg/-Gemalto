@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Thales</string>
+
+    <string name="alert_dialog_title">提示</string>
+    <string name="alert_dialog_title_reset">复原剔除</string>
+    <string name="alert_dialog_title_delete">删除用户</string>
+
+    <string name="are_you_sure_to_exit">确定要退出吗？</string>
+    <string name="are_you_sure_to_delete">确定要删除吗？</string>
+    <string name="are_you_sure_to_reset">确定要复原剔除吗？</string>
+    <string name="are_you_sure_to_delete_user">确定要删除%1$s吗？</string>
+
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+
+    <string name="network_success">请求成功</string>
+    <string name="network_error">网络通讯失败</string>
+
+    <string name="box_change_fail">换盒失败</string>
+    <string name="box_change_success">换盒成功</string>
+    <string name="box_exist">标签内容已存在</string>
+    <string name="box_is_full">标签已满</string>
+    <string name="box_information_not_same">标签内容不一致</string>
+
+    <string name="bad_card_no_esl_tip">未能获取到标签对应的信息</string>
+    <string name="bad_card_no_empty_tip">请输入坏卡数量</string>
+    <string name="bad_card_no_less_tip">坏卡数不能小于1张</string>
+    <string name="bad_card_no_more_tip">坏卡数不能大于于1000张</string>
+    <string name="modify_fail">剔除失败</string>
+    <string name="modify_success">剔除成功</string>
+
+    <string name="clear_fail">清空失败</string>
+    <string name="clear_success">清空成功</string>
+
+    <string name="package_line">包装</string>
+    <string name="production">生产</string>
+    <string name="hot_stamping">烫印</string>
+    <string name="implantation">植入</string>
+    <string name="repertory">仓库</string>
+    <string name="location">定位</string>
+    <string name="before_transfer">转移前</string>
+    <string name="post_transfer">转移后</string>
+    <string name="user_manage">用户管理</string>
+    <string name="box_change">换盒</string>
+    <string name="post_bad_card">剔除坏卡</string>
+    <string name="set">设置</string>
+
+    <string name="scan">扫描</string>
+    <string name="scan_code">扫描条码</string>
+
+    <string name="submit">提交</string>
+    <string name="force_submit">输入工单提交</string>
+    <string name="next">下一步</string>
+
+    <string name="no_access">当前用户无操作权限</string>
+    <string name="add_user_success">添加用户成功</string>
+    <string name="modify_user_success">修改用户密码成功</string>
+    <string name="delete_user_success">删除用户成功</string>
+    <string name="hot_stamping_scan_tip">点击切换剔除坏卡和换盒功能</string>
+
+</resources>

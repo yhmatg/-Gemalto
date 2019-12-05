@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_transfer"
+        android:icon="@drawable/ic_transfer"
+        android:orderInCategory="100"
+        android:title="转移"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_location"
+        android:icon="@drawable/ic_location"
+        android:orderInCategory="100"
+        android:title="定位"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_scene"
+        android:icon="@drawable/ic_scene"
+        android:orderInCategory="100"
+        android:title="切换场景"
+        app:showAsAction="ifRoom" />
+</menu>
