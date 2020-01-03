@@ -141,4 +141,16 @@ class PackageListActivity : BaseActivity() {
             }
         })
     }
+
+    override fun onPause() {
+        super.onPause()
+        scanner.unRegisterObserver(obScanner)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ModuleManager.newInstance().uhfStatus = false
+        ModuleManager.newInstance().scanStatus = false
+        scanner.setRunFlag(false)
+    }
 }

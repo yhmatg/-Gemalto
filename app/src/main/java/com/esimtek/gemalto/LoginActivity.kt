@@ -2,6 +2,7 @@ package com.esimtek.gemalto
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.widget.Toast
 import com.esimtek.gemalto.model.LoggedBean
 import com.esimtek.gemalto.model.LoginBean
@@ -31,6 +32,10 @@ class LoginActivity : BaseActivity(), PasswordModifyFragment.Listener {
     }
 
     private var scene by PreferenceUtil("scene", "main")
+    //add 20191227 start
+    private var savedName by PreferenceUtil("username", "")
+    private var savedpassword  =  PreferenceUtil("scene", "").getSharePreferences("userpassword","")
+    //add 20191227 end
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +55,10 @@ class LoginActivity : BaseActivity(), PasswordModifyFragment.Listener {
             }
             login(userName, password)
         }
+        //add 20191227 start
+        userNameEditText.text = Editable.Factory.getInstance().newEditable(savedName);
+        //passwordEditText.text = Editable.Factory.getInstance().newEditable(savedpassword);
+        //add 20191227 end
     }
 
     private fun login(userName: String, password: String) {
@@ -73,6 +82,11 @@ class LoginActivity : BaseActivity(), PasswordModifyFragment.Listener {
                     if (response.body()?.code == 1005) {
                         Toast.makeText(this@LoginActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()
                     }
+                    //add 20191227 start
+                    savedName = userName;
+                    //savedpassword = password;
+                    PreferenceUtil("scene", "").putSharePreferences("userpassword",password)
+                    //add 20191227 end
                     when (GemaltoApplication.instance.logged?.data?.userType) {
                         "admin" -> {
                             startActivity(Intent(this@LoginActivity, UserManageActivity::class.java))

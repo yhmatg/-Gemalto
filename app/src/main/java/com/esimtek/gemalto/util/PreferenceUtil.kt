@@ -21,7 +21,7 @@ class PreferenceUtil<T>(private val name: String, private val default: T) {
     }
 
     @SuppressLint("CommitPrefEdits")
-    private fun putSharePreferences(name: String, value: T) = with(prefs.edit()) {
+    public fun putSharePreferences(name: String, value: T) = with(prefs.edit()) {
         when (value) {
             is Long -> putLong(name, value)
             is String -> putString(name, value)
@@ -33,7 +33,7 @@ class PreferenceUtil<T>(private val name: String, private val default: T) {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun getSharePreferences(name: String, default: T): T = with(prefs) {
+    public fun getSharePreferences(name: String, default: T): T = with(prefs) {
         val res: Any = when (default) {
             is Long -> getLong(name, default)
             is String -> getString(name, default)

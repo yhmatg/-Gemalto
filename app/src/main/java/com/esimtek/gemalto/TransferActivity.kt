@@ -153,7 +153,7 @@ class TransferActivity : BaseActivity() {
                     Toast.makeText(this@TransferActivity, "转移成功", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(this@TransferActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@TransferActivity, "转移失败", Toast.LENGTH_SHORT).show()
                 }
             }
 

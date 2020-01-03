@@ -97,8 +97,9 @@ class LocationListActivity : BaseActivity(), LocationSubmitFragment.Listener, Lo
                 Toast.makeText(this@LocationListActivity, "未扫描到标签，请重新扫描后再试", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (adapter.list.size > 30) {
-                Toast.makeText(this@LocationListActivity, "标签数超过30，请删除后再试", Toast.LENGTH_SHORT).show()
+            //modify 20191227
+            if (adapter.list.size > 40) {
+                Toast.makeText(this@LocationListActivity, "标签数超过40，请删除后再试", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             LocationSubmitFragment().show(supportFragmentManager, "submitDialog")
@@ -108,8 +109,9 @@ class LocationListActivity : BaseActivity(), LocationSubmitFragment.Listener, Lo
                 Toast.makeText(this@LocationListActivity, "未扫描到标签，请重新扫描后再试", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (adapter.list.size > 30) {
-                Toast.makeText(this@LocationListActivity, "标签数超过30，请删除后再试", Toast.LENGTH_SHORT).show()
+            //modify 20191227
+            if (adapter.list.size > 40) {
+                Toast.makeText(this@LocationListActivity, "标签数超过40，请删除后再试", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             LocationForceSubmitFragment().show(supportFragmentManager, "forceSubmitDialog")
