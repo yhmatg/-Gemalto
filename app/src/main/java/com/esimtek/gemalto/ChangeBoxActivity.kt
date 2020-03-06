@@ -51,6 +51,7 @@ class ChangeBoxActivity : BaseActivity() {
     private var pl2Code: String? = null
     private var eslCode: String? = null
     private var pl1Bean: OrderBean.DataBean.OrderInfoBean? = null
+    private var isUnbind: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,8 +59,21 @@ class ChangeBoxActivity : BaseActivity() {
         ModuleManager.newInstance().uhfStatus = false
         ModuleManager.newInstance().scanStatus = true
         scanner.setRunFlag(false)
-        changeBox.setOnClickListener { relateESLAndPL() }
-        orderByPLCode(intent.getStringExtra("code"))
+
+        isUnbind = intent.getBooleanExtra("isUnbind", false)
+        if (isUnbind) {
+            setTitle(R.string.delete_change_box)
+            tvChangeBox.setText(R.string.delete_change_box)
+        }else{
+            orderByPLCode(intent.getStringExtra("code"))
+        }
+        changeBox.setOnClickListener {
+            if (isUnbind) {
+                unbindESLAndPL()
+            } else {
+                relateESLAndPL()
+            }
+        }
     }
 
     override fun onResume() {
@@ -71,6 +85,7 @@ class ChangeBoxActivity : BaseActivity() {
         super.onPause()
         scanner.unRegisterObserver(obScanner)
     }
+
     //展示根据条码获取的订单信息展示
     private fun initPL1View(tableBean: OrderBean.DataBean.OrderInfoBean) {
         pl1Code = tableBean.barCode
@@ -108,6 +123,7 @@ class ChangeBoxActivity : BaseActivity() {
         tv_pl2_inlay.text = tableBean.inlay
         pl2.visibility = View.VISIBLE
     }
+
     //扫描到esl条码展示
     private fun initESLView(code: String) {
         eslCode = code
@@ -117,6 +133,7 @@ class ChangeBoxActivity : BaseActivity() {
         changeBox.visibility = View.VISIBLE
         scrollView.post { scrollView.fullScroll(ScrollView.FOCUS_DOWN) }
     }
+
     //根据纸质条码网络获取订单信息
     private fun orderByPLCode(plCode: String?) {
         hudDialog.show()
@@ -140,6 +157,7 @@ class ChangeBoxActivity : BaseActivity() {
             }
         })
     }
+
     //换盒子操作，网络绑定ESL和纸质标签
     private fun relateESLAndPL() {
         hudDialog.show()
@@ -148,6 +166,28 @@ class ChangeBoxActivity : BaseActivity() {
                 hudDialog.dismiss()
                 if (response.body()?.isSuccess == true) {
                     Toast.makeText(this@ChangeBoxActivity, getString(R.string.box_change_success), Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this@ChangeBoxActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResultBean>, t: Throwable) {
+                hudDialog.dismiss()
+                t.printStackTrace()
+                Toast.makeText(this@ChangeBoxActivity, getString(R.string.network_error), Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    //解绑操作 网络解绑ESL和纸质标签
+    private fun unbindESLAndPL() {
+        hudDialog.show()
+        HttpClient().provideRetrofit().create(Api::class.java).deleteESL(RelateBean(eslCode, pl1Code, pl2Code)).enqueue(object : Callback<ResultBean> {
+            override fun onResponse(call: Call<ResultBean>, response: Response<ResultBean>) {
+                hudDialog.dismiss()
+                if (response.body()?.isSuccess == true) {
+                    Toast.makeText(this@ChangeBoxActivity, getString(R.string.unbind_box_success), Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     Toast.makeText(this@ChangeBoxActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()

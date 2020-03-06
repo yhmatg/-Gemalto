@@ -92,6 +92,15 @@ public interface Api {
     Call<ResultBean> relateESLAndPL(@Body RelateBean relateBean);
 
     /**
+     * 解绑ESL和纸质标签
+     *
+     * @param relateBean ESL条码、纸质标签条码
+     * @return 操作结果
+     */
+    @POST("gemalto/pm/post/deleteESL")
+    Call<ResultBean> deleteESL(@Body RelateBean relateBean);
+
+    /**
      * 提交坏卡
      *
      * @param badNoBean ESL条码、坏卡数量、提交类型

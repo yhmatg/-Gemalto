@@ -114,8 +114,12 @@ class PostBadCardActivity : BaseActivity() {
                 hudDialog.dismiss()
                 if (response.body()?.isSuccess == true) {
                     response.body()?.data?.orderInfoBeans?.get(0)?.let {
-                        this@PostBadCardActivity.eslCode = eslCode
-                        initPLView(it)
+                        if ("Using" == it.clearEslStatus) {
+                            this@PostBadCardActivity.eslCode = eslCode
+                            initPLView(it)
+                        }else{
+                            Toast.makeText(this@PostBadCardActivity, getString(R.string.toast_clear_esl), Toast.LENGTH_SHORT).show()
+                        }
                     }
                 } else {
                     Toast.makeText(this@PostBadCardActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()

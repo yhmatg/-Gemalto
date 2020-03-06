@@ -58,6 +58,11 @@ class HotStampingScanActivity : BaseActivity() {
             }
             return@setOnMenuItemClickListener false
         }
+
+        unbindButton.setOnClickListener {
+            val intent = Intent(this@HotStampingScanActivity, ChangeBoxActivity::class.java)
+            intent.putExtra("isUnbind", true)
+            startActivity(intent) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

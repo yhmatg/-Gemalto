@@ -87,6 +87,8 @@ public class OrderBean {
             private int hotStampingBadCardNo;
             @SerializedName("RFIDLabel_badCardNo2")
             private int implantationBadCardNo;
+            @SerializedName("StatusTable_state")
+            private String clearEslStatus;
 
             public String getAcode() {
                 return acode;
@@ -206,6 +208,14 @@ public class OrderBean {
 
             public void setImplantationBadCardNo(int implantationBadCardNo) {
                 this.implantationBadCardNo = implantationBadCardNo;
+            }
+
+            public String getClearEslStatus() {
+                return clearEslStatus;
+            }
+
+            public void setClearEslStatus(String clearEslStatus) {
+                this.clearEslStatus = clearEslStatus;
             }
 
             @Override

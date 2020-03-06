@@ -57,5 +57,9 @@
     <string name="modify_user_success">修改用户密码成功</string>
     <string name="delete_user_success">删除用户成功</string>
     <string name="hot_stamping_scan_tip">点击切换剔除坏卡和换盒功能</string>
+    <string name="toast_clear_esl">ESL标签内容已经清除</string>
+    <string name="unbind_box_success">删除换盒成功</string>
+    <string name="point_unbind">点击进入删除换盒界面</string>
+    <string name="delete_change_box">删除换盒</string>
 
 </resources>
