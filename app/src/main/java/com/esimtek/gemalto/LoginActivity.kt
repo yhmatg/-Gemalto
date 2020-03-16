@@ -73,11 +73,12 @@ class LoginActivity : BaseActivity(), PasswordModifyFragment.Listener {
                 hudDialog.dismiss()
                 if (response.body()?.isSuccess == true) {
                     GemaltoApplication.instance.logged = response.body()
-                    val isPasswordExpire = response.body()?.data?.isPasswordExpire ?: false
+                    //去除每月密码到期更新
+                   /* val isPasswordExpire = response.body()?.data?.isPasswordExpire ?: false
                     if (isPasswordExpire) {
                         PasswordModifyFragment().show(supportFragmentManager, "PasswordModifyDialog")
                         return
-                    }
+                    }*/
                     //1005 更换设备登录
                     if (response.body()?.code == 1005) {
                         Toast.makeText(this@LoginActivity, response.body()?.msg, Toast.LENGTH_SHORT).show()
