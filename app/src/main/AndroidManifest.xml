@@ -40,6 +40,7 @@
         <activity
             android:name=".PackageScanActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".PackageListActivity"
             android:label="@string/package_line"
@@ -65,6 +66,18 @@
         <activity
             android:name=".SetActivity"
             android:label="@string/set" />
+        <activity
+            android:name=".ClearEslByWorkNumActivity"
+            android:label="@string/package_line" />
+        <activity
+            android:name=".UpdateLocationByWorkNumActivity"
+            android:label="@string/location" />
+        <activity
+            android:name=".NewChangeBoxActivity"
+            android:label="@string/box_change" />
+        <activity
+            android:name=".NewTransferActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

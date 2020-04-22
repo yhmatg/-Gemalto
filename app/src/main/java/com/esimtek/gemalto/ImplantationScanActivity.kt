@@ -39,10 +39,12 @@ class ImplantationScanActivity : BaseActivity() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_transfer -> {
-                    startActivity(Intent(this, TransferActivity::class.java))
+                    //startActivity(Intent(this, TransferActivity::class.java))
+                    startActivity(Intent(this, NewTransferActivity::class.java))
                 }
                 R.id.action_location -> {
-                    startActivity(Intent(this, LocationListActivity::class.java))
+                    //startActivity(Intent(this, LocationListActivity::class.java))
+                    startActivity(Intent(this, LocationScanActivity::class.java))
                 }
                 else -> {
                     startActivity(Intent(this, MainActivity::class.java))

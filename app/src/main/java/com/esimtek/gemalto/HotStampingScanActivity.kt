@@ -27,11 +27,12 @@ class HotStampingScanActivity : BaseActivity() {
                     .subscribe {
                         BeeperUtil.beep(BEEPER_SHORT)
                         if (scanType.isChecked) {
-                            if (it.length > 6) {
-                                val intent = Intent(this@HotStampingScanActivity, ChangeBoxActivity::class.java)
-                                intent.putExtra("code", it)
+                            //if (it.length > 6) {
+                               /* val intent = Intent(this@HotStampingScanActivity, ChangeBoxActivity::class.java)
+                                intent.putExtra("code", it)*/
+                                val intent = Intent(this@HotStampingScanActivity, NewChangeBoxActivity::class.java)
                                 startActivity(intent)
-                            } else Toast.makeText(this, "请先扫描纸质标签条码", Toast.LENGTH_SHORT).show()
+                            //} else Toast.makeText(this, "请先扫描纸质标签条码", Toast.LENGTH_SHORT).show()
                         } else {
                             if (it.length == 6) {
                                 val intent = Intent(this@HotStampingScanActivity, PostBadCardActivity::class.java)
@@ -49,7 +50,8 @@ class HotStampingScanActivity : BaseActivity() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_location -> {
-                    startActivity(Intent(this, LocationListActivity::class.java))
+                    //startActivity(Intent(this, LocationListActivity::class.java))
+                    startActivity(Intent(this, LocationScanActivity::class.java))
                 }
                 else -> {
                     startActivity(Intent(this, MainActivity::class.java))

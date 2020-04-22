@@ -5,6 +5,9 @@ import com.esimtek.gemalto.model.ForceBean;
 import com.esimtek.gemalto.model.LocationBean;
 import com.esimtek.gemalto.model.LoggedBean;
 import com.esimtek.gemalto.model.LoginBean;
+import com.esimtek.gemalto.model.NewLocationBean;
+import com.esimtek.gemalto.model.NewRelateBean;
+import com.esimtek.gemalto.model.NewTransferBean;
 import com.esimtek.gemalto.model.OrderBean;
 import com.esimtek.gemalto.model.RelateBean;
 import com.esimtek.gemalto.model.ResultBean;
@@ -12,6 +15,7 @@ import com.esimtek.gemalto.model.TokenBean;
 import com.esimtek.gemalto.model.TransferBean;
 import com.esimtek.gemalto.model.UserBean;
 import com.esimtek.gemalto.model.UserManagerBean;
+import com.esimtek.gemalto.model.workNumberBean;
 
 import java.util.List;
 
@@ -156,4 +160,53 @@ public interface Api {
      */
     @POST("gemalto/pm/post/SendUserRequest")
     Call<ResultBean> userManager(@Body UserManagerBean bean);
+
+
+    //流程修改
+
+    /**
+     * 批量转移ESL 替换原有
+     *
+     * @param newTransferBean 转移前ESL条码、工单号
+     * @return 操作结果
+     */
+    @POST("gemalto/pm/post/replaceRFIDLable")
+    Call<ResultBean> transferESL(@Body NewTransferBean newTransferBean);
+
+
+    /**
+     * 更新定位  新增功能
+     *
+     * @param newLocationBean 位置、工单号
+     * @return 操作结果
+     */
+    @POST("gemalto/pm/post/updateLocationByWorkNumber")
+    Call<ResultBean> updateLocation(@Body NewLocationBean newLocationBean);
+
+    /**
+     * 清空ESL  新增功能
+     *
+     * @param workNumber 工单号
+     * @return 操作结果
+     */
+    @POST("gemalto/pm/post/clearESLForWorkNumber")
+    Call<ResultBean> clearESL(@Query("workNumber") String workNumber);
+
+    /**
+     * 绑定ESL和纸质标签 替换原有
+     *
+     * @param newRelateBean ESL条码、工单号
+     * @return 操作结果
+     */
+    @POST("gemalto/pm/post/relateESLAndPL")
+    Call<ResultBean> relateESLAndPL(@Body NewRelateBean newRelateBean);
+
+    /**
+     * 根据ESL条码或者plCode 纸质条码获取工单信息
+     *
+     * @param plCodeOrESL ESL条码或者plCode 纸质条码
+     * @return 工单信息
+     */
+    @GET("gemalto/pm/get/GetWorkNumberByBarcodeOrESLcode")
+    Call<workNumberBean> getWrokNumByPlCodeOrESL(@Query("plCodeOrESL") String plCodeOrESL);
 }

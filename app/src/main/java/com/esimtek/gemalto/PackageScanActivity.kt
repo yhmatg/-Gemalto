@@ -17,7 +17,8 @@ class PackageScanActivity : BaseActivity() {
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.action_location -> {
-                    startActivity(Intent(this, LocationListActivity::class.java))
+                    //startActivity(Intent(this, LocationListActivity::class.java))
+                    startActivity(Intent(this, LocationScanActivity::class.java))
                 }
                 else -> {
                     startActivity(Intent(this, MainActivity::class.java))
@@ -25,6 +26,14 @@ class PackageScanActivity : BaseActivity() {
                 }
             }
             return@setOnMenuItemClickListener false
+        }
+
+        clear_by_worknumber.setOnClickListener{
+            startActivity(Intent(this, ClearEslByWorkNumActivity::class.java))
+        }
+
+        scan.setOnClickListener{
+            startActivity(Intent(this, PackageListActivity::class.java))
         }
     }
 
@@ -40,7 +49,7 @@ class PackageScanActivity : BaseActivity() {
                 true
             }
             KeyEvent.KEYCODE_F4 -> {
-                startActivity(Intent(this, PackageListActivity::class.java))
+                //startActivity(Intent(this, PackageListActivity::class.java))
                 true
             }
             else -> super.onKeyDown(keyCode, event)

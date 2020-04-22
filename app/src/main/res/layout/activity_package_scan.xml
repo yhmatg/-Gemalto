@@ -114,7 +114,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/scan"
+            android:text="@string/clear_esl_scan_every"
+            android:textColor="@android:color/white" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/clear_by_worknumber"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_margin="32dp"
+        app:cardBackgroundColor="#1dc263"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scan">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/clear_esl_by_worknumber"
             android:textColor="@android:color/white" />
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>
