@@ -4,10 +4,13 @@ import android.app.Application
 import com.esimtek.gemalto.model.LoggedBean
 import com.esimtek.gemalto.util.BeeperUtil
 import com.esimtek.gemalto.util.BeeperUtil.BeepMode
+import com.esimtek.gemalto.util.MyCrashListener
 import com.esimtek.gemalto.util.PreferenceUtil
 import com.nativec.tools.ModuleManager
 import com.rfid.ReaderConnector
 import com.scanner1d.ODScannerConnector
+import com.xuexiang.xlog.XLog
+import com.xuexiang.xlog.crash.CrashHandler
 import java.util.*
 
 class GemaltoApplication : Application() {
@@ -31,6 +34,8 @@ class GemaltoApplication : Application() {
         BeeperUtil.setBeepMode(BeepMode.BEEP_PER_TAG)
         scannerConnector.connectCom("dev/ttyS1", 9600)
         readerConnector.connectCom("dev/ttyS4", 115200)
+        XLog.init(this)
+        CrashHandler.getInstance().setOnCrashListener(MyCrashListener())
     }
 
     override fun onTerminate() {
