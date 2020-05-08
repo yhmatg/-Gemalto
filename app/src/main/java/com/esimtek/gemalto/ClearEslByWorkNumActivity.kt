@@ -95,7 +95,7 @@ class ClearEslByWorkNumActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu_switch, menu)
-        menu?.findItem(R.id.action_rfid)?.isVisible = false
+        //menu?.findItem(R.id.action_rfid)?.isVisible = false
         menu?.findItem(R.id.action_scan)?.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
@@ -156,7 +156,6 @@ class ClearEslByWorkNumActivity : BaseActivity() {
             }
         })
     }
-
 
     override fun onPause() {
         super.onPause()

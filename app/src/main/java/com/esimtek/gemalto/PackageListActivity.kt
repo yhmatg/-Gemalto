@@ -86,10 +86,10 @@ class PackageListActivity : BaseActivity() {
                 Toast.makeText(this@PackageListActivity, "未扫描到标签，请重新扫描后再试", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            if (adapter.list.size > 21) {
+            /*if (adapter.list.size > 21) {
                 Toast.makeText(this@PackageListActivity, "标签数量超过21，请检查后长按删除", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
-            }
+            }*/
             clearESL()
         }
     }

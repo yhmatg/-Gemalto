@@ -75,7 +75,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NewChangeBoxActivity"
-            android:label="@string/box_change" />
+            android:label="@string/box_change"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NewTransferActivity"
             android:theme="@style/AppTheme.NoActionBar" />

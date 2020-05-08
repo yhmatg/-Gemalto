@@ -44,10 +44,9 @@ class NewTransferActivity : BaseActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
-                       /* if (it.length == 11) {
+                        if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                            adapter.addItem(it.substring(0..8).replace(" ", ""))
-                        }*/
+                        }
                     })
         }
     }
@@ -123,7 +122,7 @@ class NewTransferActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu_switch, menu)
-        menu?.findItem(R.id.action_rfid)?.isVisible = false
+        //menu?.findItem(R.id.action_rfid)?.isVisible = false
         menu?.findItem(R.id.action_scan)?.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }

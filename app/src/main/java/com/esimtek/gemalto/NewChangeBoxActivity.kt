@@ -2,6 +2,7 @@ package com.esimtek.gemalto
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
 import android.view.View
 import android.widget.ScrollView
 import android.widget.Toast
@@ -12,11 +13,18 @@ import com.esimtek.gemalto.network.HttpClient
 import com.esimtek.gemalto.util.BeeperUtil
 import com.esimtek.gemalto.util.ZxingUtil
 import com.nativec.tools.ModuleManager
+import com.rfid.RFIDReaderHelper
+import com.rfid.rxobserver.RXObserver
+import com.rfid.rxobserver.bean.RXInventoryTag
 import com.scanner1d.ODScannerHelper
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_clear_els.*
 import kotlinx.android.synthetic.main.activity_new_change_box.*
+import kotlinx.android.synthetic.main.activity_new_change_box.clear_work_num
+import kotlinx.android.synthetic.main.activity_new_change_box.esl_num
+import kotlinx.android.synthetic.main.activity_new_change_box.toolbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,9 +33,25 @@ import java.util.*
 class NewChangeBoxActivity : BaseActivity() {
 
     private val scanner: ODScannerHelper = ODScannerHelper.getDefaultHelper()
+    private val rfid: RFIDReaderHelper = RFIDReaderHelper.getDefaultHelper()
+
     private val postTransferList: ArrayList<String> = ArrayList()
 
     private val adapter = ESLListAdapter()
+
+    private var obRFID: RXObserver = object : RXObserver() {
+        override fun onInventoryTag(tag: RXInventoryTag) {
+            disposable.add(Observable.just(tag.strEPC)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
+                        if (it.length == 11) {
+                            BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
+                        }
+                    })
+        }
+    }
 
     private var obScanner: Observer = Observer { _, value ->
         if (value is String)
@@ -51,9 +75,8 @@ class NewChangeBoxActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_change_box)
-        ModuleManager.newInstance().uhfStatus = false
-        ModuleManager.newInstance().scanStatus = true
-        scanner.setRunFlag(false)
+        initScanner()
+        setSupportActionBar(toolbar)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         next_submit.setOnClickListener {
@@ -81,6 +104,29 @@ class NewChangeBoxActivity : BaseActivity() {
             adapter.clear()
             postTransferList.clear()
         }
+
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_rfid -> {
+                    initRFID()
+                    it.isVisible = false
+                    toolbar.menu.findItem(R.id.action_scan).isVisible = true
+                }
+                R.id.action_scan -> {
+                    initScanner()
+                    it.isVisible = false
+                    toolbar.menu.findItem(R.id.action_rfid).isVisible = true
+                }
+            }
+            return@setOnMenuItemClickListener false
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu_switch, menu)
+        //menu?.findItem(R.id.action_rfid)?.isVisible = false
+        menu?.findItem(R.id.action_scan)?.isVisible = false
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onResume() {
@@ -92,6 +138,7 @@ class NewChangeBoxActivity : BaseActivity() {
         super.onPause()
         scanner.unRegisterObserver(obScanner)
     }
+
 
     //换盒子操作，网络绑定ESL和纸质标签
     private fun relateESLAndPL(bean: NewRelateBean) {
@@ -145,5 +192,19 @@ class NewChangeBoxActivity : BaseActivity() {
     private fun eslkNumIsEmpty() :Boolean{
 
         return esl_num.text.toString().isEmpty()
+    }
+
+    private fun initRFID() {
+        rfid.registerObserver(obRFID)
+        ModuleManager.newInstance().uhfStatus = true
+        ModuleManager.newInstance().scanStatus = false
+        scanner.setRunFlag(true)
+    }
+
+    private fun initScanner() {
+        scanner.registerObserver(obScanner)
+        ModuleManager.newInstance().uhfStatus = false
+        ModuleManager.newInstance().scanStatus = true
+        scanner.setRunFlag(false)
     }
 }
