@@ -68,7 +68,7 @@
     <string name="get_work_num_success">获取工单成功</string>
     <string name="update_loc_by_worknumber">通过工单号更新定位</string>
     <string name="update_loc_by_scan">逐个扫描更新定位</string>
-    <string name="submit_by_worknum">获取工单提交</string>
+    <string name="submit_by_worknum">提交</string>
     <string name="transfer_by_worknum">转移</string>
     <string name="esl_number_sacn">扫描标签数:</string>
     <string name="clear_worknum_info">清空工单信息</string>
