@@ -36,6 +36,7 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
 
     private val scanner: ODScannerHelper = ODScannerHelper.getDefaultHelper()
     private val rfid: RFIDReaderHelper = RFIDReaderHelper.getDefaultHelper()
+    private var isFirstResume = false
     private var locationItem = 0
     private lateinit var locationValue: Array<String>
 
@@ -70,6 +71,7 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_update_loc_by_worknum)
+        initScanner()
         locationValue = resources.getStringArray(R.array.locationValue)
         setSupportActionBar(toolbar)
         toolbar.setOnMenuItemClickListener {
@@ -87,7 +89,6 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
             }
             return@setOnMenuItemClickListener false
         }
-        initScanner()
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 //不做操作
@@ -110,6 +111,7 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
             work_number.text = ""
             esl_num.text = ""
         }
+        isFirstResume = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -175,6 +177,14 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(!isFirstResume){
+            scanner.registerObserver(obScanner)
+        }else{
+            isFirstResume = false
+        }
+    }
 
     override fun onPause() {
         super.onPause()

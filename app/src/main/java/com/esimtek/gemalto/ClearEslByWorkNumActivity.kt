@@ -31,6 +31,7 @@ class ClearEslByWorkNumActivity : BaseActivity() {
 
     private val scanner: ODScannerHelper = ODScannerHelper.getDefaultHelper()
     private val rfid: RFIDReaderHelper = RFIDReaderHelper.getDefaultHelper()
+    private var isFirstResume = false
 
     private var obRFID: RXObserver = object : RXObserver() {
         override fun onInventoryTag(tag: RXInventoryTag) {
@@ -62,6 +63,7 @@ class ClearEslByWorkNumActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_clear_els)
+        initScanner()
         setSupportActionBar(toolbar)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -78,7 +80,6 @@ class ClearEslByWorkNumActivity : BaseActivity() {
             }
             return@setOnMenuItemClickListener false
         }
-        initScanner()
         clear.setOnClickListener {
             if (work_number.text.isNullOrEmpty()) {
                 Toast.makeText(this@ClearEslByWorkNumActivity, "未获取到工单信息，请重新扫描后再试", Toast.LENGTH_SHORT).show()
@@ -91,6 +92,7 @@ class ClearEslByWorkNumActivity : BaseActivity() {
             work_number.text = ""
             esl_num.text = ""
         }
+        isFirstResume = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -157,6 +159,14 @@ class ClearEslByWorkNumActivity : BaseActivity() {
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        if(!isFirstResume){
+            scanner.registerObserver(obScanner)
+        }else{
+            isFirstResume = false
+        }
+    }
     override fun onPause() {
         super.onPause()
         scanner.unRegisterObserver(obScanner)

@@ -147,6 +147,11 @@ class PackageListActivity : BaseActivity() {
         scanner.unRegisterObserver(obScanner)
     }
 
+    override fun onResume() {
+        super.onResume()
+        scanner.registerObserver(obScanner)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         ModuleManager.newInstance().uhfStatus = false

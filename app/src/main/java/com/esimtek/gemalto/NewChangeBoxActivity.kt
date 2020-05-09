@@ -34,6 +34,7 @@ class NewChangeBoxActivity : BaseActivity() {
 
     private val scanner: ODScannerHelper = ODScannerHelper.getDefaultHelper()
     private val rfid: RFIDReaderHelper = RFIDReaderHelper.getDefaultHelper()
+    private var isFirstResume = false
 
     private val postTransferList: ArrayList<String> = ArrayList()
 
@@ -120,6 +121,7 @@ class NewChangeBoxActivity : BaseActivity() {
             }
             return@setOnMenuItemClickListener false
         }
+        isFirstResume = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -131,7 +133,11 @@ class NewChangeBoxActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        scanner.registerObserver(obScanner)
+        if(!isFirstResume){
+            scanner.registerObserver(obScanner)
+        }else{
+            isFirstResume = false
+        }
     }
 
     override fun onPause() {
@@ -139,6 +145,12 @@ class NewChangeBoxActivity : BaseActivity() {
         scanner.unRegisterObserver(obScanner)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        ModuleManager.newInstance().uhfStatus = false
+        ModuleManager.newInstance().scanStatus = false
+        scanner.setRunFlag(false)
+    }
 
     //换盒子操作，网络绑定ESL和纸质标签
     private fun relateESLAndPL(bean: NewRelateBean) {

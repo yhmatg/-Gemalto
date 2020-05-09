@@ -36,6 +36,7 @@ class NewTransferActivity : BaseActivity() {
 
     private val scanner: ODScannerHelper = ODScannerHelper.getDefaultHelper()
     private val rfid: RFIDReaderHelper = RFIDReaderHelper.getDefaultHelper()
+    private var isFirstResume = false
 
     private var obRFID: RXObserver = object : RXObserver() {
         override fun onInventoryTag(tag: RXInventoryTag) {
@@ -74,6 +75,7 @@ class NewTransferActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_transfer)
+        initScanner()
         setSupportActionBar(toolbar)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -90,7 +92,6 @@ class NewTransferActivity : BaseActivity() {
             }
             return@setOnMenuItemClickListener false
         }
-        initScanner()
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         next_submit.setOnClickListener {
@@ -118,6 +119,7 @@ class NewTransferActivity : BaseActivity() {
             adapter.clear()
             postTransferList.clear()
         }
+        isFirstResume = true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -199,5 +201,26 @@ class NewTransferActivity : BaseActivity() {
                 Toast.makeText(this@NewTransferActivity, getString(R.string.network_error), Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(!isFirstResume){
+            scanner.registerObserver(obScanner)
+        }else{
+            isFirstResume = false
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        scanner.unRegisterObserver(obScanner)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ModuleManager.newInstance().uhfStatus = false
+        ModuleManager.newInstance().scanStatus = false
+        scanner.setRunFlag(false)
     }
 }
