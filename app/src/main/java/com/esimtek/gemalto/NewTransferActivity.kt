@@ -216,11 +216,4 @@ class NewTransferActivity : BaseActivity() {
         super.onPause()
         scanner.unRegisterObserver(obScanner)
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ModuleManager.newInstance().uhfStatus = false
-        ModuleManager.newInstance().scanStatus = false
-        scanner.setRunFlag(false)
-    }
 }

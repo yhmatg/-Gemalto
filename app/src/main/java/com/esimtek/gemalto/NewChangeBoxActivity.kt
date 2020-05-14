@@ -145,13 +145,6 @@ class NewChangeBoxActivity : BaseActivity() {
         scanner.unRegisterObserver(obScanner)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        ModuleManager.newInstance().uhfStatus = false
-        ModuleManager.newInstance().scanStatus = false
-        scanner.setRunFlag(false)
-    }
-
     //换盒子操作，网络绑定ESL和纸质标签
     private fun relateESLAndPL(bean: NewRelateBean) {
         hudDialog.show()
