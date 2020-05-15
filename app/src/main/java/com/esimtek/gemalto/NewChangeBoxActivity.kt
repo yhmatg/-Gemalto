@@ -2,6 +2,7 @@ package com.esimtek.gemalto
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.View
 import android.widget.ScrollView
@@ -49,6 +50,7 @@ class NewChangeBoxActivity : BaseActivity() {
                         // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
                         if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
+                            adapter.addItem(it.substring(0..8).replace(" ", ""))
                         }
                     })
         }
@@ -211,5 +213,12 @@ class NewChangeBoxActivity : BaseActivity() {
         ModuleManager.newInstance().uhfStatus = false
         ModuleManager.newInstance().scanStatus = true
         scanner.setRunFlag(false)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        when (keyCode) {
+            KeyEvent.KEYCODE_F4 -> rfid.realTimeInventory(0xFF.toByte(), 0x01.toByte())
+        }
+        return super.onKeyDown(keyCode, event)
     }
 }

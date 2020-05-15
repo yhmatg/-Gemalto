@@ -47,6 +47,7 @@ class NewTransferActivity : BaseActivity() {
                         // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
                         if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
+                            adapter.addItem(it.substring(0..8).replace(" ", ""))
                         }
                     })
         }
