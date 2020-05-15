@@ -51,6 +51,7 @@ class NewChangeBoxActivity : BaseActivity() {
                         if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
                             adapter.addItem(it.substring(0..8).replace(" ", ""))
+                            esl_num_scan.setText(adapter.list.size.toString())
                         }
                     })
         }
