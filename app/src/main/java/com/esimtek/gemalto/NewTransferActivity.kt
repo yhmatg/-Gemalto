@@ -47,7 +47,7 @@ class NewTransferActivity : BaseActivity() {
                         // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
                         if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                            adapter.addItem(it.substring(0..8).replace(" ", ""))
+                            adapter.addItem(it.substring(2).replace(" ", ""))
                             esl_num_scan.setText(adapter.list.size.toString())
                         }
                     })
@@ -61,11 +61,11 @@ class NewTransferActivity : BaseActivity() {
                     .subscribe {
                         // ESL条码长度为6
                         BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                        if (it.length == 6) {
+                        if (it.length == 8) {
                             if(workNumIsEmpty()){
-                                getWrokNumByPlCodeOrESL(it)
+                                getWrokNumByPlCodeOrESL(it.substring(2))
                             }else{
-                                adapter.addItem(it)
+                                adapter.addItem(it.substring(2))
                                 esl_num_scan.setText(adapter.list.size.toString())
                             }
                         } else {

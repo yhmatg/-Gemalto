@@ -34,9 +34,9 @@ class HotStampingScanActivity : BaseActivity() {
                                 startActivity(intent)
                             //} else Toast.makeText(this, "请先扫描纸质标签条码", Toast.LENGTH_SHORT).show()
                         } else {
-                            if (it.length == 6) {
+                            if (it.length == 8) {
                                 val intent = Intent(this@HotStampingScanActivity, PostBadCardActivity::class.java)
-                                intent.putExtra("code", it)
+                                intent.putExtra("code", it.substring(2))
                                 startActivity(intent)
                             } else Toast.makeText(this, "ESL条码格式错误", Toast.LENGTH_SHORT).show()
                         }

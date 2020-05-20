@@ -62,8 +62,8 @@ class UpdateLocationByWorkNumActivity : BaseActivity() {
                     .subscribe {
                         BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
                         // ESL条码长度为6
-                        if (it.length == 6) {
-                          getWrokNumByPlCodeOrESL(it)
+                        if (it.length == 8) {
+                          getWrokNumByPlCodeOrESL(it.substring(2))
                         } else Toast.makeText(this, "ESL条码格式错误", Toast.LENGTH_SHORT).show()
                     })
     }

@@ -24,9 +24,9 @@ class ImplantationScanActivity : BaseActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                        if (it.length == 6) {
+                        if (it.length == 8) {
                             val intent = Intent(this@ImplantationScanActivity, PostBadCardActivity::class.java)
-                            intent.putExtra("code", it)
+                            intent.putExtra("code", it.substring(2))
                             startActivity(intent)
                         } else Toast.makeText(this, "ESL条码格式错误", Toast.LENGTH_SHORT).show()
                     })

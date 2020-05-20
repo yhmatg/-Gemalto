@@ -36,8 +36,10 @@ class PostBadCardActivity : BaseActivity() {
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
-                        BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                        orderByESLCode(it)
+                        if (it.length == 8) {
+                            BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
+                            orderByESLCode(it.substring(2))
+                        }
                     })
     }
 

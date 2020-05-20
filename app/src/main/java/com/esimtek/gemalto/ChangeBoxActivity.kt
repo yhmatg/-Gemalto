@@ -33,7 +33,7 @@ class ChangeBoxActivity : BaseActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                        if (it.length > 6) {
+                        if (it.length > 8) {
                             if ((it == pl1Code) or (it == pl2Code)) {
                                 Toast.makeText(this, getString(R.string.box_exist), Toast.LENGTH_SHORT).show()
                                 return@subscribe
@@ -43,7 +43,7 @@ class ChangeBoxActivity : BaseActivity() {
                                 return@subscribe
                             }
                             Toast.makeText(this, getString(R.string.box_is_full), Toast.LENGTH_SHORT).show()
-                        } else initESLView(it)
+                        } else initESLView(it.substring(2))
                     })
     }
 

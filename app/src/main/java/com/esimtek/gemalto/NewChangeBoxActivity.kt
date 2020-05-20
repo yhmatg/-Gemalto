@@ -50,7 +50,7 @@ class NewChangeBoxActivity : BaseActivity() {
                         // ESL条码长度为6，写入EPC后长度为8，每两位中间有空格，共11位
                         if (it.length == 11) {
                             BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                            adapter.addItem(it.substring(0..8).replace(" ", ""))
+                            adapter.addItem(it.substring(2).replace(" ", ""))
                             esl_num_scan.setText(adapter.list.size.toString())
                         }
                     })
@@ -64,10 +64,10 @@ class NewChangeBoxActivity : BaseActivity() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
                         BeeperUtil.beep(BeeperUtil.BEEPER_SHORT)
-                        if(it.length > 6){
+                        if(it.length > 8){
                             getWrokNumByPlCodeOrESL(it)
-                        }else if(it.length == 6){
-                            adapter.addItem(it)
+                        }else if(it.length == 8){
+                            adapter.addItem(it.substring(2))
                             esl_num_scan.setText(adapter.list.size.toString())
                         } else {
                             Toast.makeText(this, "条码格式错误", Toast.LENGTH_SHORT).show()
