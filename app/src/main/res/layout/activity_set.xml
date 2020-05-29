@@ -40,7 +40,6 @@
                 android:layout_margin="16dp"
                 android:background="@null"
                 android:ems="10"
-                android:inputType="number"
                 android:textColor="#5a5a76"
                 android:textSize="14sp">
 
