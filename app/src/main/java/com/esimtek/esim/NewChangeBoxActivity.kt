@@ -75,7 +75,7 @@ class NewChangeBoxActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_change_box)
-        initScanner()
+        initRFID()
         setSupportActionBar(toolbar)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
@@ -125,8 +125,8 @@ class NewChangeBoxActivity : BaseActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu_switch, menu)
-        //menu?.findItem(R.id.action_rfid)?.isVisible = false
-        menu?.findItem(R.id.action_scan)?.isVisible = false
+        menu?.findItem(R.id.action_rfid)?.isVisible = false
+        //menu?.findItem(R.id.action_scan)?.isVisible = false
         return super.onCreateOptionsMenu(menu)
     }
 

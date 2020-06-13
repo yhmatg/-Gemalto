@@ -2,20 +2,12 @@
 <resources>
     <array name="location">
         <item>烫印线1</item>
-        <item>烫印线2</item>
-        <item>植入等待区1</item>
-        <item>植入等待区2</item>
         <item>植入线1</item>
-        <item>植入线2</item>
         <item>待包装</item>
     </array>
     <array name="locationValue">
         <item>HotstampingLine1</item>
-        <item>HotstampingLine2</item>
-        <item>WaitImplantation1</item>
-        <item>WaitImplantation2</item>
         <item>ImplantationLine1</item>
-        <item>ImplantationLine2</item>
         <item>WaitPackaging</item>
     </array>
 </resources>
