@@ -121,6 +121,7 @@ class NewChangeBoxActivity : BaseActivity() {
             return@setOnMenuItemClickListener false
         }
         isFirstResume = true
+        getWrokNumByPlCodeOrESL(intent.getStringExtra("code"))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
