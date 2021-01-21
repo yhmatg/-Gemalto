@@ -48,4 +48,5 @@ dependencies {
     implementation 'com.kaopiz:kprogresshud:1.2.0'
     implementation 'com.github.xuexiangjys.XLog:xlog-core:1.2.1'
     implementation 'com.github.xuexiangjys.XLog:xlog-crash:1.2.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }
